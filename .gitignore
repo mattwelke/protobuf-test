@@ -1,0 +1,6 @@
+# generated source code when program is built
+generated
+
+# serialized data when program is run
+person.pbdata
+person.json
