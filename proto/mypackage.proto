@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package mypackage;
+
+import "google/protobuf/wrappers.proto";
+
+option go_package = ".;goprotos";
+
+option java_package = "mypackage";
+option java_outer_classname = "MyProtos";
+
+message MyMessage {
+    google.protobuf.BoolValue my_bool_value = 1;
+}
