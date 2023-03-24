@@ -7,20 +7,14 @@ import (
 	pb "github.com/mattwelke/protobuf-test/generated/go"
 	"google.golang.org/protobuf/encoding/protojson"
 	"google.golang.org/protobuf/proto"
-	"google.golang.org/protobuf/types/known/wrapperspb"
 )
 
 func main() {
-	myMessage := &pb.MyMessage{
-		MyBoolValue: &wrapperspb.BoolValue{
-			Value: false,
-		},
-	}
-
-	if myMessage.MyBoolValue != nil {
-		fmt.Printf("Data provided. It is %v.\n", myMessage.MyBoolValue.Value)
-	} else {
-		fmt.Printf("Data not provided.\n")
+	myMessage := &pb.SearchRequest{
+		Query:         "test query",
+		PageNumber:    1,
+		ResultPerPage: 1,
+		Corpus:        pb.Corpus_CORPUS_IMAGES,
 	}
 
 	out, err := proto.Marshal(myMessage)
@@ -29,6 +23,7 @@ func main() {
 	}
 
 	fmt.Printf("Proto-encoded message: %v\n", out)
+	fmt.Printf("# bytes = %d\n", len(out))
 
 	outJSON, err := protojson.Marshal(myMessage)
 	if err != nil {
@@ -36,4 +31,5 @@ func main() {
 	}
 
 	fmt.Printf("JSON-encoded message: %s\n", string(outJSON))
+	fmt.Printf("# bytes = %d\n", len(outJSON))
 }
